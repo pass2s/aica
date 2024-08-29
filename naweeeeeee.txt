@@ -1,0 +1,143 @@
+% Step 1: Define the initial list of colors
+initial_colors([red, blue, green, yellow, orange]).
+
+% Step 2: Check if pink is in the list
+contains_pink(Colors) :-
+    member(pink, Colors).
+
+% Step 3: Add pink if not present, otherwise add grey
+add_color(Colors, NewColors) :-
+    contains_pink(Colors),
+    append(Colors, [grey], NewColors).
+add_color(Colors, NewColors) :-
+    \+ contains_pink(Colors),
+    append(Colors, [pink], NewColors).
+
+% Step 4: Sort the list in descending order
+sort_descending(Colors, SortedColors) :-
+    sort(0, @>=, Colors, SortedColors).
+
+% Step 5: Get the last color in the list
+last_color([Color], Color).
+last_color([_|Tail], Color) :-
+    last_color(Tail, Color).
+
+% Step 6: Count the number of colors in the list
+count_colors(Colors, Count) :-
+    length(Colors, Count).
+
+% Main predicate to execute the steps
+run :-
+    initial_colors(InitialColors),
+    add_color(InitialColors, UpdatedColors),
+    sort_descending(UpdatedColors, SortedColors),
+    last_color(SortedColors, LastColor),
+    count_colors(SortedColors, ColorCount),
+    write('Colors List: '), writeln(SortedColors),
+    write('Last Color in the List: '), writeln(LastColor),
+    write('Number of Colors in the List: '), writeln(ColorCount).
+
+
+
+
+-----------------------running code ----------------------------
+
+
+?- run.
+	or
+?- [colors].
+
+
+
+
+
+
+--------------------------------------------------------------------
+
+-----------------create table
+
+% Student details
+student('Saman', 'Perera', 11021).
+student('Mohamed', 'Humaith', 11022).
+student('Nimal', 'Silva', 11023).
+student('Viji', 'Kumar', 11024).
+student('Lasantha', 'Jayamanna', 11025).
+student('Nimal', 'Silva', 11026).
+student('Ponnambalam', 'Ramanadan', 11027).
+
+% Score details
+scores(11021, uct31021, 50).
+scores(11021, swt31012, 71).
+scores(11021, cis31012, 57).
+scores(11021, swt31022, 65).
+scores(11021, nst31022, 61).
+
+scores(11022, uct31021, 65).
+scores(11022, swt31012, 50).
+scores(11022, cis31012, 85).
+scores(11022, swt31022, 49).
+scores(11022, nst31022, 82).
+
+scores(11023, uct31021, 100).
+scores(11023, swt31012, 85).
+scores(11023, cis31012, 100).
+scores(11023, swt31022, 89).
+scores(11023, nst31022, 76).
+
+scores(11024, uct31021, 73).
+scores(11024, swt31012, 65).
+scores(11024, cis31012, 59).
+scores(11024, swt31022, 82).
+scores(11024, nst31022, 66).
+
+scores(11025, uct31021, 60).
+scores(11025, swt31012, 90).
+scores(11025, cis31012, 78).
+scores(11025, swt31022, 96).
+scores(11025, nst31022, 100).
+
+
+
+------------condition-----------------------
+****Is Janaka an undergraduate student?*****
+
+is_undergraduate('Janaka') :-
+    student('Janaka', _, _).
+
+
+
+***run code *****
+% Query
+?- is_undergraduate('Janaka').
+
+---------------
+
+*****Who are the registered undergraduates in the departments?
+
+
+registered_undergraduates(FirstName, LastName) :-
+    student(FirstName, LastName, _).
+
+
+*******output code ********
+% Query
+?- registered_undergraduates(FirstName, LastName).
+
+
+--------------
+
+*****What is the index number of Silva?
+
+index_no_of_silva(IndexNo) :-
+    student(_, 'Silva', IndexNo).
+
+
+***********outpu cod********
+% Query
+?- index_no_of_silva(IndexNo).
+
+
+
+
+
+
